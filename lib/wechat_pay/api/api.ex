@@ -151,6 +151,19 @@ defmodule WechatPay.API do
     Client.post("payitil/report", attrs, [], config)
   end
 
+  def transfer(attrs, config) do
+    ssl = config |> load_ssl() |> Enum.filter(&value_not_nil/1)
+
+    Client.post("mmpaymkttransfers/promotion/transfers", attrs, [ssl: ssl], config)
+  end
+
+  def query_transfer(atts, config) do
+    ssl = config |> load_ssl() |> Enum.filter(&value_not_nil/1)
+
+    Client.post("mmpaymkttransfers/gettransferinfo", attrs, [ssl: ssl], config)
+  end
+
+
   defp decode_public(nil), do: nil
 
   defp decode_public(pem) do
